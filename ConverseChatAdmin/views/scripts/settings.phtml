@@ -1,0 +1,81 @@
+<style>
+    div#users-table{
+        left: 104px;
+        margin-bottom: 0;
+        margin-right: 0;
+        margin-top: 0;
+        overflow-x: hidden;
+        overflow-y: auto;
+        padding-bottom: 0;
+        padding-right: 0;
+        padding-top: 0;
+        position: relative;
+        top: 12px;
+        width: 721px;
+    }
+    #users-table th, #users-table td {
+        padding: 7px 17px 5px !important;
+    }
+</style>
+
+
+<div id="primary_header">
+    <h1><?php print $this->translate('ConverseChatAdmin Settings')?></h1>
+    <div id="back_button">
+        <a href="#">
+            <span class="stronglastword"><?php echo $this->translate('Save Settings') ?></span>
+        </a>
+    </div>
+</div>
+
+<div id="primary_content">
+    <div id="primary_content_inner">
+        <div id="Flash" class="flash_notice"><?php print $this->translate('The settings have been updated') ?>
+    </div>
+
+        <form id="settingsForm" method="post" action="<?php echo $this->moduleBaseUrl ?>/plugininterface/index/Atmail_ConverseChatAdmin_Plugin/saveSettings">
+
+            <input type="hidden" name="save" value="1" />
+
+            <table class="settings">
+                <tr>
+                    <td class="label"><?php print $this->translate('Prebinding Domain')?></td>
+                    <td>
+                        <input type="text" class="large" name="cp_prebind" id="cp_prebind" value="http://<?php echo $this->cp_prebind ?>" />
+                        <small><?php print $this->translate('Specify a prebinding domain')?></small></td>
+                </tr>
+                    <tr>
+                        <td class="label"></td>
+                        <td>
+                            <div id="back_button">
+                                <a href="#">
+                                    <span class="stronglastword"><?php echo $this->translate('Apply') ?></span>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+
+            </table>
+
+        </form>
+        <script type="text/javascript" language="javascript">
+            $(function(){
+                var tabId = '#ConverseChatAdmin_Settings';
+                $('#back_button a', tabId).bind("click", function()
+                {
+                    return $('#settingsForm', tabId).submit();
+                });
+
+                $('#settingsForm', tabId).submit(function()
+                {
+                    $.php($("#settingsForm", tabId).attr("action"),$("#settingsForm", tabId).serializeArray());
+                    return false;
+                });
+
+            });
+
+        </script>
+
+</div>
+
+
